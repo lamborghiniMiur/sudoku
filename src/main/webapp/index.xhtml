@@ -8,10 +8,40 @@
         <h:outputStylesheet name="resources/css/default.css"/>
         <h:outputStylesheet name="resources/css/cssLayout.css"/>
         <title>Tri-Sudoku</title>
+        <style type="text/css">
+            <!--
+            table { border-collapse: collapse; border: solid thick; }
+            colgroup, tbody { border: solid medium; }
+            td { border: solid thin; height: 3em; width: 3em;
+                  text-align: center; padding: 0; }
+            -->
+        </style>
     </h:head>
 
     <h:body>
         <h1>TRI版数独だよ！</h1>
+        <article>
+            <table>
+                <colgroup><col></col><col></col><col></col></colgroup>
+                <colgroup><col></col><col></col><col></col></colgroup>
+                <colgroup><col></col><col></col><col></col></colgroup> 
+                <tbody>
+                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
+                    <tr> <td>  </td> <td>  </td> <td> </td>  <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
+                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
+                </tbody>                                              
+                <tbody>
+                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
+                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
+                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr> 
+                </tbody>
+                <tbody>
+                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr> 
+                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr> 
+                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
+                </tbody>
+            </table>
+        </article>
 
     </h:body>
 

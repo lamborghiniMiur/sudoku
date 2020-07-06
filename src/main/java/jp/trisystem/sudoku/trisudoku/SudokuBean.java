@@ -17,13 +17,18 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 public class SudokuBean implements Serializable {
-   private String title = "数独パズル";
+
+    private final String TITLE;
+
+    public SudokuBean() {
+        this.TITLE = "数独パズル";
+    }
 
     /**
      * @return the title
      */
     public String getTitle() {
-        return title;
+        return TITLE;
     }
    
 

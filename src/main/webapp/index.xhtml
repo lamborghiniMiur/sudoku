@@ -15,10 +15,15 @@
             td { border: solid thin; height: 3em; width: 3em;
                   text-align: center; padding: 0; }
             -->
+            
+           
+            
         </style>
+       
     </h:head>
 
     <h:body>
+        <h:form>
         <h1>#{sudokuBean.title}</h1>
         <article>
             <table>
@@ -42,6 +47,26 @@
                 </tbody>
             </table>
         </article>
+        
+        
+        <h:commandButton class="btn btn-default" id="execute" value="チェック" action="#{sudokuBean.execute()}"  />
+        <h:commandButton class="btn btn-default" id="reset" value="リセット" action="#{sudokuBean.reset()}"  />
+    
+    <h3>#{sudokuBean.message}</h3>
+
+
+        
+    
+    
+   
+       
+        
+        
+        
+        
+        </h:form>
+        
+        
 
     </h:body>
 

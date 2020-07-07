@@ -18,10 +18,14 @@ import javax.inject.Named;
 @ViewScoped
 public class SudokuBean implements Serializable {
 
-    private final String TITLE;
+    /** タイトル. */
+    private static final String TITLE = "数独パズル";
+    
+    /**　メッセージ. */
+    private String message;
 
+    /** コンストラクタ. */
     public SudokuBean() {
-        this.TITLE = "数独パズル";
     }
 
     /**
@@ -30,7 +34,25 @@ public class SudokuBean implements Serializable {
     public String getTitle() {
         return TITLE;
     }
-   
+/** ボタンを押した時. */
+    public void execute() {
+        message = "正解";
+    }
 
-    
+    /**
+     * メッセージを返す.
+     * 
+     * @return メッセージ
+     */
+    public String getMessage() {
+        return message;
+    }
+
+     /**   
+     * リセットボタンを押した時.
+     */
+    public void reset() {
+        message = null;
+    }
+
 }

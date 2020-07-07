@@ -21,7 +21,7 @@ public class GenRandomNumberList {
      * 
      * @return 順不同リスト
      */
-    public List<Integer> getList() {
+    public static List<Integer> getList() {
 
         // 1～9の整数をリストにセット
         List<Integer> randomNumberList = new ArrayList<>();

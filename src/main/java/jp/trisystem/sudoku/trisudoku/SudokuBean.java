@@ -84,11 +84,13 @@ public class SudokuBean implements Serializable {
     /** 生成済数値リスト_ブロックI. */
     private GeneratedNumber numberListBlockI;
     
+    /** 縦、横のグリッド数. */
+    private static final Integer NINE = 9;
     
 
     /** コンストラクタ. */
     public SudokuBean() {
-        this.numberCellArray = new NumberCell[9][9];
+        this.numberCellArray = new NumberCell[NINE][NINE];
     }
     
     /**
@@ -96,6 +98,7 @@ public class SudokuBean implements Serializable {
      */
     @PostConstruct
     private void init() {
+        reset();
         
     }
     
@@ -109,13 +112,13 @@ public class SudokuBean implements Serializable {
             // 初期化
             initializeGeneratedNumber();
             // 1行目から9行目に設定
-            for (int x = 0; x < 9; x++) {
+            for (int x = 0; x < NINE; x++) {
                 // 1～9の順不同リストの取得
                 List<Integer> shuffleList = GenRandomNumberList.getList();
                 // 1行分の作成
                 makeRow(x, shuffleList);
             }
-        } while(!check());
+        } while (!check());
         
         // セルオブジェクトへの設定
         
@@ -125,28 +128,28 @@ public class SudokuBean implements Serializable {
     /**
      * 9x9の数値が正しく配置されたことの判定.
      * 
-     * @return 
+     * @return 正しく配置されたことの可否
      */
     private Boolean check() {
         Boolean ret = false;
-        if ((numberListC1.getListSize() == 9)
-                && (numberListC2.getListSize() == 9)
-                && (numberListC3.getListSize() == 9)
-                && (numberListC4.getListSize() == 9)
-                && (numberListC5.getListSize() == 9)
-                && (numberListC6.getListSize() == 9)
-                && (numberListC7.getListSize() == 9)
-                && (numberListC8.getListSize() == 9)
-                && (numberListC9.getListSize() == 9)
-                && (numberListBlockA.getListSize() == 9)
-                && (numberListBlockB.getListSize() == 9)
-                && (numberListBlockC.getListSize() == 9)
-                && (numberListBlockD.getListSize() == 9)
-                && (numberListBlockE.getListSize() == 9)
-                && (numberListBlockF.getListSize() == 9)
-                && (numberListBlockG.getListSize() == 9)
-                && (numberListBlockH.getListSize() == 9)
-                && (numberListBlockI.getListSize() == 9)) {
+        if ((numberListC1.getListSize() == NINE)
+                && (numberListC2.getListSize() == NINE)
+                && (numberListC3.getListSize() == NINE)
+                && (numberListC4.getListSize() == NINE)
+                && (numberListC5.getListSize() == NINE)
+                && (numberListC6.getListSize() == NINE)
+                && (numberListC7.getListSize() == NINE)
+                && (numberListC8.getListSize() == NINE)
+                && (numberListC9.getListSize() == NINE)
+                && (numberListBlockA.getListSize() == NINE)
+                && (numberListBlockB.getListSize() == NINE)
+                && (numberListBlockC.getListSize() == NINE)
+                && (numberListBlockD.getListSize() == NINE)
+                && (numberListBlockE.getListSize() == NINE)
+                && (numberListBlockF.getListSize() == NINE)
+                && (numberListBlockG.getListSize() == NINE)
+                && (numberListBlockH.getListSize() == NINE)
+                && (numberListBlockI.getListSize() == NINE)) {
             ret = true;
         }
         
@@ -189,14 +192,14 @@ public class SudokuBean implements Serializable {
 
         int cellNo;
         List<Integer> usedColumn = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < NINE; i++) {
 
             // 数値を取り出す
             cellNo = shuffleList.get(i);
 
             // 1列ずつ左から重複しない列を探し、重複しない場合のみ、
             // 生成済数値リスト（縦）と、生成済数値リスト(ブロック）に設定する。
-            for (int y = 0; y < 9; y++) {
+            for (int y = 0; y < NINE; y++) {
 
                 if (!usedColumn.contains(y)) {
                     // 生成済数値リスト（ブロック）の取得
@@ -329,7 +332,16 @@ public class SudokuBean implements Serializable {
         buildGridNumber();
 
         // 生成済数値リストから、セルオブジェクトの配列へ設定
-        
+        for (int i = 0; i < NINE; i++) {
+            GeneratedNumber genNumber = generatedNumberFactoryByColumn(i);
+            List<Integer> list = genNumber.getGeneratedNumberList();
+            for (int j = 0; j < NINE; j++) {
+                // セルオブジェクトの生成
+                NumberCell numberCell = new NumberCell();
+                numberCell.setNumber(list.get(j));
+                setNumberCell(i, j, numberCell);
+            }
+        }
         
         // 隠すセルの設定
 
@@ -365,6 +377,7 @@ public class SudokuBean implements Serializable {
     }
 
     /**
+     * セルオブジェクト配列への設定.
      * 
      * @param x 配列のインデックス
      * @param y 配列のインデックス
@@ -373,5 +386,53 @@ public class SudokuBean implements Serializable {
     private void setNumberCell(int x, int y, NumberCell numberCell) {
         this.numberCellArray[x][y] = numberCell;
     }
+    
+    /**
+     * 横1列分のセルのリストを返す.
+     * 
+     * @param row 行
+     * @return 横1列分のセルのリスト
+     */
+    public List<NumberCell> getNumberCellRow(int row) {
+        List<NumberCell> numberCellList = new ArrayList<>();
+        
+        for (int i = 0; i < NINE; i++) {
+            GeneratedNumber gn = generatedNumberFactoryByColumn(i);
+            List<Integer> list = gn.getGeneratedNumberList();
 
+            NumberCell nc = new NumberCell();
+            nc.setNumber(list.get(row));
+            numberCellList.add(nc);
+        }
+        
+        return numberCellList;
+        
+    }
+
+    public List<List<NumberCell>> getTopBlock() {
+        return getNumberCell3Rows(NumberBlock.TOP);
+    }
+
+    public List<List<NumberCell>> getMiddleBlock() {
+        return getNumberCell3Rows(NumberBlock.MIDDLE);
+    }
+
+    public List<List<NumberCell>> getBottomBlock() {
+        return getNumberCell3Rows(NumberBlock.BOTTOM);
+    }
+    
+    private List<List<NumberCell>> getNumberCell3Rows(NumberBlock block) {
+        List<List<NumberCell>> numberCellLists = new ArrayList<>();
+        List<NumberCell> numberCellList = new ArrayList<>();
+
+        numberCellList = getNumberCellRow(block.getRownum());
+        numberCellLists.add(numberCellList);
+        numberCellList = getNumberCellRow(block.getRownum2());
+        numberCellLists.add(numberCellList);
+        numberCellList = getNumberCellRow(block.getRownum3());
+        numberCellLists.add(numberCellList);
+
+        return numberCellLists;
+    }
+    
 }

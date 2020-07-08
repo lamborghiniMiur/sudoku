@@ -31,7 +31,7 @@ public class GeneratedNumber {
      * @param num 追加する数値
      */
     public void addNumber(int num) {
-        generatedNumberList.add(num);
+        getGeneratedNumberList().add(num);
     }
     
     /**
@@ -40,7 +40,7 @@ public class GeneratedNumber {
      * @return リストのサイズ
      */
     public int getListSize() {
-        return generatedNumberList.size();
+        return getGeneratedNumberList().size();
     }
     
     /**
@@ -50,7 +50,7 @@ public class GeneratedNumber {
      * @return 存在の可否
      */
     public Boolean isExists(int num) {
-        return generatedNumberList.contains(num);
+        return getGeneratedNumberList().contains(num);
     }
     
     /**
@@ -59,6 +59,13 @@ public class GeneratedNumber {
      */
     public void initialize() {
         this.generatedNumberList = new ArrayList<>();
+    }
+
+    /**
+     * @return the generatedNumberList
+     */
+    public List<Integer> getGeneratedNumberList() {
+        return generatedNumberList;
     }
     
 }

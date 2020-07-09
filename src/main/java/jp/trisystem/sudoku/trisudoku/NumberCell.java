@@ -108,6 +108,19 @@ public class NumberCell {
     public Boolean isReadonly() {
         return !hide;
     }
+    
+    /**
+     * 固定数字かどうかを返す.
+     * 
+     * @return 
+     */
+    public String getFixed() {
+        String fixed = "";
+        if (!hide) {
+            fixed = "fixed";
+        }
+        return fixed;
+    }
 
     /**
      * @return the seqNo

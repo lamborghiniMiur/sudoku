@@ -107,6 +107,8 @@ public class SudokuBean implements Serializable {
      */
     private void buildGridNumber() {
         
+        // 9x9のグリッドに数値が埋めれるまで繰り返す。
+        // （乱数の生成内容によっては、9x9が埋められない場合があるのので）
         do {
             // 初期化
             initializeGeneratedNumber();
@@ -118,9 +120,6 @@ public class SudokuBean implements Serializable {
                 makeRow(x, shuffleList);
             }
         } while (!check());
-        
-        // セルオブジェクトへの設定
-        
 
     }
     
@@ -308,11 +307,43 @@ public class SudokuBean implements Serializable {
         return TITLE;
     }
 
-    /** ボタンを押した時. */
+    /**
+     * チェックボタンクリック時の処理.
+     * 
+     */
     public void execute() {
-        message = "正解";
+        
+        // チェック
+        if (checkAllGrid()) {
+            message = "正解です！";
+        } else {
+            message = "不正解！";
+        };
+        
+        
     }
 
+    /**
+     * グリッドのチェック.
+     * 
+     */
+    private Boolean checkAllGrid() {
+        Boolean checkAllGrid = Boolean.TRUE;
+        for (int x = 0; x < NINE; x++) {
+            for (int y = 0; y < NINE; y++) {
+                if (!numberCellArray[x][y].isReadonly()) {
+                    numberCellArray[x][y].muchNumber();
+                    numberCellArray[x][y].setHide(Boolean.FALSE);
+                    if (numberCellArray[x][y].getFixed().equals("error")) {
+                        checkAllGrid = Boolean.FALSE;
+                    }
+                }
+            }
+        }
+        return checkAllGrid;
+    }
+            
+    
     /**
      * メッセージを返す.
      * 
@@ -344,6 +375,7 @@ public class SudokuBean implements Serializable {
                 numberCell.setNumber(list.get(j));
                 
                 if (hideSeqNoList.contains(seq)) {
+                    numberCell.setReadonly(Boolean.FALSE);
                     numberCell.setHide(Boolean.TRUE);
                 }
                 

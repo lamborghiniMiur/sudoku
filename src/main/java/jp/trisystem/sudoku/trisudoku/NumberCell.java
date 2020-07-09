@@ -24,22 +24,21 @@ public class NumberCell {
     /** 隠すかどうか. */
     private Boolean hide;
     
+    /** セルの状態. */
+    private CellCondition condition;
+    
+    /** 読み取り専用族生. */
+    private Boolean readonly;
+
+    
     /**
      * コンストラクタ.
      */
     public NumberCell() {
         this.number = 0;
         this.hide = false;
-    }
-    
-    /**
-     * 一致チェック
-     * 
-     * @param num
-     * @return 
-     */
-    public Boolean isMuch(int num) {
-        return this.getNumber() == num;
+        this.readonly = true;
+        this.condition = CellCondition.INITIAL;
     }
     
     /**
@@ -79,7 +78,13 @@ public class NumberCell {
      */
     public String getDispNumber() {
         if (!this.hide) {
-            return String.valueOf(number);
+            
+            switch(condition) {
+                case INITIAL:
+                    return String.valueOf(number);
+                default:
+                    return dispNumber;
+            }
         }
         return "";
     }
@@ -101,15 +106,6 @@ public class NumberCell {
     }
 
     /**
-     * 読み取り専用属性.
-     * 
-     * @return 
-     */
-    public Boolean isReadonly() {
-        return !hide;
-    }
-    
-    /**
      * 固定数字かどうかを返す.
      * 
      * @return 
@@ -118,6 +114,18 @@ public class NumberCell {
         String fixed = "";
         if (!hide) {
             fixed = "fixed";
+            
+            switch (condition) {
+                case MUCH:
+                    fixed = "much";
+                    break;
+                case UNMUCH:
+                    fixed = "error";
+                    
+                    break;
+                default:
+                    break;
+            }
         }
         return fixed;
     }
@@ -135,5 +143,35 @@ public class NumberCell {
     public void setSeqNo(int seqNo) {
         this.seqNo = seqNo;
     }
+    
+
+    /**
+     * 入力された数値と元の数値の一致チェック.
+     */
+    public void muchNumber() {
+        if (dispNumber.equals(String.valueOf(number))) {
+            this.condition = CellCondition.MUCH;
+        } else {
+            this.condition = CellCondition.UNMUCH;
+        }
+    }
+
+    /**
+     * @param readonly the readonly to set
+     */
+    public void setReadonly(Boolean readonly) {
+        this.readonly = readonly;
+    }
+
+    /**
+     * 読み取り専用属性.
+     * 
+     * @return 
+     */
+    public Boolean isReadonly() {
+        return this.readonly;
+    }
+    
+    
     
 }

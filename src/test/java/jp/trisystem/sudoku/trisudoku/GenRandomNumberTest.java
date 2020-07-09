@@ -38,13 +38,27 @@ public class GenRandomNumberTest {
     @org.junit.Test
     public void testGenRandomNumberList() {
         System.out.println("genRandomNumberList");
-        GenRandomNumberList instance = new GenRandomNumberList();
         List<Integer> expResult = null;
-        List<Integer> result = instance.getList();
+        List<Integer> result = GenRandomNumberList.getList();
         
         for (Integer rndNumber : result) {
             System.out.println(rndNumber);
         }
+    }
+    
+    /**
+     * 
+     */
+    @org.junit.Test
+    public void testGetHideSeqNo() {
+        System.out.println("getHideSeqNo");
+        List<Integer> expResult = null;
+        List<Integer> result = GenRandomNumberList.getHideSeqNo();
+
+        for (Integer seqNo : result) {
+            System.out.println("[" + seqNo + "]");
+        }
+
     }
     
 }

@@ -12,8 +12,14 @@ package jp.trisystem.sudoku.trisudoku;
  */
 public class NumberCell {
     
+    /** 連番. */
+    private int seqNo;
+    
     /** 数値. */
     private int number;
+    
+    /** 数値(文字). */
+    private String dispNumber;
     
     /** 隠すかどうか. */
     private Boolean hide;
@@ -67,11 +73,54 @@ public class NumberCell {
     }
 
     /**
+     * 表示する数字を返す.
+     * 
+     * @return 表示する数字
+     */
+    public String getDispNumber() {
+        if (!this.hide) {
+            return String.valueOf(number);
+        }
+        return "";
+    }
+
+    /**
+     * 
+     * @param dispNumber 
+     */
+    public void setDispNumber(String dispNumber) {
+        this.dispNumber = dispNumber;
+    }
+    
+    
+    /**
      * @param number the number to set
      */
     public void setNumber(int number) {
         this.number = number;
     }
 
+    /**
+     * 読み取り専用属性.
+     * 
+     * @return 
+     */
+    public Boolean isReadonly() {
+        return !hide;
+    }
+
+    /**
+     * @return the seqNo
+     */
+    public int getSeqNo() {
+        return seqNo;
+    }
+
+    /**
+     * @param seqNo the seqNo to set
+     */
+    public void setSeqNo(int seqNo) {
+        this.seqNo = seqNo;
+    }
     
 }

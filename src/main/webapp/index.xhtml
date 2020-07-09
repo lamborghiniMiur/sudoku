@@ -16,10 +16,11 @@
             colgroup, tbody { border: solid medium; }
             td { border: solid thin; height: 3em; width: 3em;
                   text-align: center; padding: 0; }
+            input {
+                text-align:center;
+                border:0;
+            }
             -->
-            
-           
-            
         </style>
        
     </h:head>
@@ -35,21 +36,53 @@
                 <tbody>
                     <tr>
                         <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(0)}">
-                            <td><input type="number" class="form-control" jsf:value="${row.number}" jsf:readonly="false" size="1" maxlength="1" /></td>
+                            <td><input type="text" class="form-control" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
                         </ui:repeat>
                     </tr>
-                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr> 
+                    <tr>
+                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(1)}">
+                            <td><input type="text" class="form-control" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
+                        </ui:repeat>
+                    </tr>
+                    <tr>
+                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(2)}">
+                            <td><input type="text" class="form-control" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
+                        </ui:repeat>
+                    </tr>
                 </tbody>                                              
                 <tbody>
-                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr> 
+                    <tr>
+                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(3)}">
+                            <td><input type="text" class="form-control" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
+                        </ui:repeat>
+                    </tr>
+                    <tr>
+                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(4)}">
+                            <td><input type="text" class="form-control" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
+                        </ui:repeat>
+                    </tr>
+                    <tr>
+                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(5)}">
+                            <td><input type="text" class="form-control" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
+                        </ui:repeat>
+                    </tr>
                 </tbody>
                 <tbody>
-                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr> 
-                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr> 
-                    <tr> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
+                    <tr>
+                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(6)}">
+                            <td><input type="text" class="form-control" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
+                        </ui:repeat>
+                    </tr>
+                    <tr>
+                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(7)}">
+                            <td><input type="text" class="form-control" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
+                        </ui:repeat>
+                    </tr>
+                    <tr>
+                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(8)}">
+                            <td><input type="text" class="form-control" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
+                        </ui:repeat>
+                    </tr>
                 </tbody>
             </table>
         </article>

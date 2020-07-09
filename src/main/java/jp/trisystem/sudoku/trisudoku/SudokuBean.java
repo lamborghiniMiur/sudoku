@@ -99,7 +99,6 @@ public class SudokuBean implements Serializable {
     @PostConstruct
     private void init() {
         reset();
-        
     }
     
     /**
@@ -330,8 +329,12 @@ public class SudokuBean implements Serializable {
         
         // 9x9の配列作成
         buildGridNumber();
+        
+        // 隠すセルの番号を取得
+        List<Integer> hideSeqNoList = GenRandomNumberList.getHideSeqNo();
 
         // 生成済数値リストから、セルオブジェクトの配列へ設定
+        int seq = 0;
         for (int i = 0; i < NINE; i++) {
             GeneratedNumber genNumber = generatedNumberFactoryByColumn(i);
             List<Integer> list = genNumber.getGeneratedNumberList();
@@ -339,7 +342,13 @@ public class SudokuBean implements Serializable {
                 // セルオブジェクトの生成
                 NumberCell numberCell = new NumberCell();
                 numberCell.setNumber(list.get(j));
+                
+                if (hideSeqNoList.contains(seq)) {
+                    numberCell.setHide(Boolean.TRUE);
+                }
+                
                 setNumberCell(i, j, numberCell);
+                seq++;
             }
         }
         
@@ -349,33 +358,6 @@ public class SudokuBean implements Serializable {
         message = null;
     }
     
-    /**
-     * 
-     * 
-     * @param x
-     * @param y
-     * @return 
-     */
-    public String getCellNumber(int x, int y) {
-        String cellNumber = "";
-        NumberCell nc = numberCellArray[x][y];
-        
-        if (!nc.isHide()) {
-            cellNumber = String.valueOf(nc.getNumber());
-        }
-        return cellNumber;
-    }
-    
-    /**
-     * 
-     * @param x 配列のインデックス
-     * @param y 配列のインデックス
-     * @return the numberCellArray
-     */
-    private NumberCell getNumberCell(int x, int y) {
-        return numberCellArray[x][y];
-    }
-
     /**
      * セルオブジェクト配列への設定.
      * 
@@ -397,12 +379,7 @@ public class SudokuBean implements Serializable {
         List<NumberCell> numberCellList = new ArrayList<>();
         
         for (int i = 0; i < NINE; i++) {
-            GeneratedNumber gn = generatedNumberFactoryByColumn(i);
-            List<Integer> list = gn.getGeneratedNumberList();
-
-            NumberCell nc = new NumberCell();
-            nc.setNumber(list.get(row));
-            numberCellList.add(nc);
+            numberCellList.add(this.numberCellArray[row][i]);
         }
         
         return numberCellList;

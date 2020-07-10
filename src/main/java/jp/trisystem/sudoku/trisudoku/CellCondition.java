@@ -11,10 +11,13 @@ package jp.trisystem.sudoku.trisudoku;
  * @author miura
  */
 public enum CellCondition {
+    
     /** 初期状態. */
     INITIAL,
+    
     /** 一致. */
     MUCH,
+    
     /** 不一致. */
     UNMUCH;
 }

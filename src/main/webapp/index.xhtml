@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -107,26 +108,17 @@
                 </tbody>
             </table>
         </article>
-        
-        
+
+        <h:selectOneRadio id="billingCalculationMethod" value="#{sudokuBean.hideCell}" layout="lineDirection">
+            <f:selectItems value="#{sudokuBean.difficultyValues}" />
+        </h:selectOneRadio>
+
         <h:commandButton class="btn btn-default" id="execute" value="チェック" action="#{sudokuBean.execute()}"  />
         <h:commandButton class="btn btn-default" id="reset" value="リセット" action="#{sudokuBean.reset()}"  />
-    
-    <h3>#{sudokuBean.message}</h3>
 
+        <h3>#{sudokuBean.message}</h3>
 
-        
-    
-    
-   
-       
-        
-        
-        
-        
         </h:form>
-        
-        
 
     </h:body>
 

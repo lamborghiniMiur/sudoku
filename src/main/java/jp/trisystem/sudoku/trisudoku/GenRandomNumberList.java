@@ -15,8 +15,7 @@ import java.util.List;
  * @author miura
  */
 public class GenRandomNumberList {
-    
-    private static final int HIDE_CELL_COUNT = 38;
+
     
     /**
      * 順不同の1～9の整数が含まれたリストを返す.
@@ -42,7 +41,7 @@ public class GenRandomNumberList {
      * 
      * @return 隠すセルの番号リスト
      */
-    public static List<Integer> getHideSeqNo() {
+    public static List<Integer> getHideSeqNo(int hideCell) {
         List<Integer> hideSeqNo = new ArrayList<>();
         
         List<Integer> intList = new ArrayList<>();
@@ -54,7 +53,7 @@ public class GenRandomNumberList {
         Collections.shuffle(intList);
 
         // シャッフルしたリストから最初の所定の件数のみ取得して返す。
-        for (int i = 0; i < HIDE_CELL_COUNT; i++) {
+        for (int i = 0; i < hideCell; i++) {
             hideSeqNo.add(intList.get(i));
         }
         

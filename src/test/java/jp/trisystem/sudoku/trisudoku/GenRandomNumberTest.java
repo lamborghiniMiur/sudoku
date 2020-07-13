@@ -53,7 +53,7 @@ public class GenRandomNumberTest {
     public void testGetHideSeqNo() {
         System.out.println("getHideSeqNo");
         List<Integer> expResult = null;
-        List<Integer> result = GenRandomNumberList.getHideSeqNo();
+        List<Integer> result = GenRandomNumberList.getHideSeqNo(Level.BEGINNER.getHideCell());
 
         for (Integer seqNo : result) {
             System.out.println("[" + seqNo + "]");

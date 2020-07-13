@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,7 +12,11 @@
         <h:outputStylesheet name="resources/css/cssLayout.css"/>
         <title>Tri-Sudoku</title>
         <style type="text/css">
+
+              
+
             <!--
+            
             table { border-collapse: collapse; border: solid thick; }
             colgroup, tbody { border: solid medium; }
             td { border: solid thin; height: 3em; width: 3em;
@@ -111,6 +116,15 @@
         
         <h:commandButton class="btn btn-default" id="execute" value="チェック" action="#{sudokuBean.execute()}"  />
         <h:commandButton class="btn btn-default" id="reset" value="リセット" action="#{sudokuBean.reset()}"  />
+        
+        <p>難易度<br></br>
+            <h:selectOneRadio id="level" value="#{sudokuBean.hideCell}"  layout="lineDirection" >
+                <f:selectItems value="#{sudokuBean.levelValues}" />
+            </h:selectOneRadio>
+
+        </p>
+        
+
     
     <h3>#{sudokuBean.message}</h3>
 

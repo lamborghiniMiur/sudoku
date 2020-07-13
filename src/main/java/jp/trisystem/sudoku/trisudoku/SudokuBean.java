@@ -8,9 +8,12 @@ package jp.trisystem.sudoku.trisudoku;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+
+
 
 /**
  * 数独パズル.
@@ -87,6 +90,12 @@ public class SudokuBean implements Serializable {
     /** 縦、横のグリッド数. */
     private static final Integer NINE = 9;
     
+    /** 難易度. */
+    private String level;
+    
+    private int hideCell;
+    
+    
 
     /** コンストラクタ. */
     public SudokuBean() {
@@ -98,8 +107,14 @@ public class SudokuBean implements Serializable {
      */
     @PostConstruct
     private void init() {
+        this.setHideCell(Level.BEGINNER.getHideCell());
+    
         reset();
     }
+    
+    
+    
+
     
     /**
      * グリッド(9x9)の作成.
@@ -362,7 +377,7 @@ public class SudokuBean implements Serializable {
         buildGridNumber();
         
         // 隠すセルの番号を取得
-        List<Integer> hideSeqNoList = GenRandomNumberList.getHideSeqNo();
+        List<Integer> hideSeqNoList = GenRandomNumberList.getHideSeqNo(hideCell);
 
         // 生成済数値リストから、セルオブジェクトの配列へ設定
         int seq = 0;
@@ -384,7 +399,7 @@ public class SudokuBean implements Serializable {
             }
         }
         
-        // 隠すセルの設定
+
 
 
         message = null;
@@ -418,30 +433,30 @@ public class SudokuBean implements Serializable {
         
     }
 
-    public List<List<NumberCell>> getTopBlock() {
-        return getNumberCell3Rows(NumberBlock.TOP);
-    }
 
-    public List<List<NumberCell>> getMiddleBlock() {
-        return getNumberCell3Rows(NumberBlock.MIDDLE);
-    }
-
-    public List<List<NumberCell>> getBottomBlock() {
-        return getNumberCell3Rows(NumberBlock.BOTTOM);
+    
+    public Map<String,Object> getLevelValues() {
+        return Level.getLevelValues();
     }
     
-    private List<List<NumberCell>> getNumberCell3Rows(NumberBlock block) {
-        List<List<NumberCell>> numberCellLists = new ArrayList<>();
-        List<NumberCell> numberCellList = new ArrayList<>();
+    
 
-        numberCellList = getNumberCellRow(block.getRownum());
-        numberCellLists.add(numberCellList);
-        numberCellList = getNumberCellRow(block.getRownum2());
-        numberCellLists.add(numberCellList);
-        numberCellList = getNumberCellRow(block.getRownum3());
-        numberCellLists.add(numberCellList);
 
-        return numberCellLists;
+
+    /**
+     * @return the hideCell
+     */
+    public int getHideCell() {
+        return hideCell;
     }
+
+    /**
+     * @param hideCell the hideCell to set
+     */
+    public void setHideCell(int hideCell) {
+        this.hideCell = hideCell;
+    }
+
+
     
 }

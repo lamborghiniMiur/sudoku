@@ -12,9 +12,6 @@ package jp.trisystem.sudoku.trisudoku;
  */
 public class NumberCell {
     
-    /** 連番. */
-    private int seqNo;
-    
     /** 数値. */
     private int number;
     
@@ -129,21 +126,6 @@ public class NumberCell {
         }
         return fixed;
     }
-
-    /**
-     * @return the seqNo
-     */
-    public int getSeqNo() {
-        return seqNo;
-    }
-
-    /**
-     * @param seqNo the seqNo to set
-     */
-    public void setSeqNo(int seqNo) {
-        this.seqNo = seqNo;
-    }
-    
 
     /**
      * 入力された数値と元の数値の一致チェック.

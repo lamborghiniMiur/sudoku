@@ -103,7 +103,7 @@ public class SudokuBean implements Serializable {
     @PostConstruct
     private void init() {
         
-        // 
+        // 9x9のセルのうち、隠すセルの数を取得
         this.hideCell = Difficulty.EASY.getHideCell();
         
         reset();
@@ -115,7 +115,7 @@ public class SudokuBean implements Serializable {
      */
     private void buildGridNumber() {
         
-        // 9x9のグリッドに数値が埋めれるまで繰り返す。
+        // 生成済数値リストにすべての数値(9x9)が埋めれるまで繰り返す。
         // （乱数の生成内容によっては、9x9が埋められない場合があるのので）
         do {
             // 初期化
@@ -132,7 +132,7 @@ public class SudokuBean implements Serializable {
     }
     
     /**
-     * 9x9の数値が正しく配置されたことの判定.
+     * 生成済数値リストすべてに9件の数値が配置されたことの判定.
      * 
      * @return 正しく配置されたことの可否
      */
@@ -167,6 +167,8 @@ public class SudokuBean implements Serializable {
      * 生成済数値リストの初期化.
      */
     private void initializeGeneratedNumber() {
+        
+        // 縦用の初期化
         numberListC1 = new GeneratedNumber();
         numberListC2 = new GeneratedNumber();
         numberListC3 = new GeneratedNumber();
@@ -177,6 +179,7 @@ public class SudokuBean implements Serializable {
         numberListC8 = new GeneratedNumber();
         numberListC9 = new GeneratedNumber();
         
+        // ブロック用の初期化
         numberListBlockA = new GeneratedNumber();
         numberListBlockB = new GeneratedNumber();
         numberListBlockC = new GeneratedNumber();
@@ -334,6 +337,7 @@ public class SudokuBean implements Serializable {
     /**
      * グリッドのチェック.
      * 
+     * @return true:正解、false:不正解(エラーあり)
      */
     private Boolean checkAllGrid() {
         Boolean checkAllGrid = Boolean.TRUE;
@@ -361,12 +365,13 @@ public class SudokuBean implements Serializable {
         return message;
     }
 
-     /**   
-     * リセットボタンを押した時.
+    /**   
+     * リセットボタンを押した時の処理.
+     * 
      */
     public void reset() {
         
-        // 9x9の配列作成
+        // 9x9の組み合わせ作成
         buildGridNumber();
         
         // 隠すセルの番号を取得
@@ -374,19 +379,27 @@ public class SudokuBean implements Serializable {
 
         // 生成済数値リストから、セルオブジェクトの配列へ設定
         int seq = 0;
+        
+        // 列のループ
         for (int i = 0; i < NINE; i++) {
+            
+            // 該当の生成済数値リスト格納クラスをファクトリより取得
             GeneratedNumber genNumber = generatedNumberFactoryByColumn(i);
             List<Integer> list = genNumber.getGeneratedNumberList();
+
+            // 行のループ
             for (int j = 0; j < NINE; j++) {
                 // セルオブジェクトの生成
                 NumberCell numberCell = new NumberCell();
                 numberCell.setNumber(list.get(j));
                 
+                // 隠すセルの場合の設定
                 if (hideSeqNoList.contains(seq)) {
                     numberCell.setReadonly(Boolean.FALSE);
                     numberCell.setHide(Boolean.TRUE);
                 }
                 
+                // セルオブジェクトの配列へ設定
                 setNumberCell(i, j, numberCell);
                 seq++;
             }
@@ -426,7 +439,7 @@ public class SudokuBean implements Serializable {
     /**
      * 難易度の種類を返す.
      *
-     * @return 難易度の種類
+     * @return 難易度の種類(f:selectItems用のオブジェクト)
      */
     public Map<String, Object> getDifficultyValues() {
         return Difficulty.getDifficultyValues();

@@ -56,8 +56,9 @@ public enum Difficulty {
     }
     
     /**
+     * 難易度のラジオボタン用.
      * 
-     * @return 
+     * @return ラジオボタン用
      */
     public static Map<String, Object> getDifficultyValues() {
         Map<String, Object> difficultyValues = new LinkedHashMap<>();

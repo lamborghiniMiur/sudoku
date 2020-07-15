@@ -1,0 +1,77 @@
+input {
+    text-align:center;
+    border:0;
+    font-size: 100%;
+}
+input.fixed {
+    background-color: #c2dfef;
+}
+input.error {
+    background-color: #D20005;
+}
+input.much {
+    background-color: #33ff33;
+}
+
+#sudoku {
+    width:450px;
+    height:450px;
+    border-top:3px solid;
+    border-left:3px solid;
+    border-right:1px solid;
+    border-bottom:1px solid;
+    border-color: #000000;
+}
+.childCube {
+    width:49px;
+    height:49px;
+    float:left;
+    border-right:1px solid;
+    border-bottom:1px solid;
+    border-color: #000000;
+    line-height: 49px;
+    text-align: center;
+}
+.childCube2 {
+    width:48px;
+    height:48px;
+    float:left;
+    border-right:2px solid;
+    border-bottom:2px solid;
+    border-color: #000000;
+    line-height: 49px;
+    text-align: center;
+}
+.childCube3 {
+    width:48px;
+    height:49px;
+    float:left;
+    border-right:2px solid;
+    border-bottom:1px solid;
+    border-color: #000000;
+    line-height: 49px;
+    text-align: center;
+}
+.childCube4 {
+    width:49px;
+    height:48px;
+    float:left;
+    border-right:1px solid;
+    border-bottom:2px solid;
+    border-color: #000000;
+    line-height: 49px;
+    text-align: center;
+}
+
+
+div.fixed {
+    background-color: #c2dfef;
+}
+div.error {
+    background-color: #D20005;
+}
+div.much {
+    background-color: #33ff33;
+}
+
+

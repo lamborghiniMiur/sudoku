@@ -434,6 +434,64 @@ public class SudokuBean implements Serializable {
         return numberCellList;
         
     }
+
+    /**
+     * 全セル(9x9)のリストを返す.
+     *
+     * @return 全セル(9x9=81個)のリスト
+     */
+    public List<NumberCell> getAllNumberCellRow() {
+        List<NumberCell> numberCellList = new ArrayList<>();
+        for (int row = 0; row < NINE; row++) {
+            for (int column = 0; column < NINE; column++) {
+                // セルの枠線の属性を取得
+                String cellBorderType = getCellBorderType(row, column);
+                this.numberCellArray[row][column].setCellborderType(cellBorderType);
+                // リストに格納
+                numberCellList.add(this.numberCellArray[row][column]);
+            }
+        }
+        return numberCellList;
+    }
+    
+    /**
+     * セルの属性(枠線の太さ)を返す.
+     * 
+     * 枠線の太さの定義名称を返す。
+     * 
+     * @param row 行
+     * @param column 列
+     * @return 定義名称
+     */
+    public String getCellBorderType(int row, int column) {
+        CellBorderType cbt = CellBorderType.childCube;
+        // 行の判定
+        switch (row) { 
+            case 2:
+            case 5:
+            case 8:
+                cbt = CellBorderType.childCube4;
+                break;
+            default:
+                break;
+        }
+        
+        // 列の判定
+        switch (column) {
+            case 2:
+            case 5:
+            case 8:
+                if (cbt.equals(CellBorderType.childCube)) {
+                    cbt = CellBorderType.childCube3;
+                } else {
+                    cbt = CellBorderType.childCube2;
+                }
+                break;
+            default:
+                break;
+        }
+        return cbt.name();
+    }
     
     
     /**

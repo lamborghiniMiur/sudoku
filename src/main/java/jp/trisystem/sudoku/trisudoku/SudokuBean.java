@@ -328,7 +328,7 @@ public class SudokuBean implements Serializable {
         if (checkAllGrid()) {
             message = "正解です！";
         } else {
-            message = "不正解！";
+            message = "誤りがあります。";
         };
         
         

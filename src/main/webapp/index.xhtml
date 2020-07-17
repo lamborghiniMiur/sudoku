@@ -8,140 +8,74 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="resources/css/default.css"/>
-        <h:outputStylesheet name="resources/css/cssLayout.css"/>
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="sudoku.css"/>
+        <h:outputStylesheet library="css" name="radiodesign.css"/>
+        
         <title>Tri-Sudoku</title>
-        <style type="text/css">
-
-              
-
-            <!--
-            
-            table { border-collapse: collapse; border: solid thick; }
-            colgroup, tbody { border: solid medium; }
-            td { border: solid thin; height: 3em; width: 3em;
-                  text-align: center; padding: 0; }
-            
-            td.fixed {
-                background-color: #c2dfef;
-            }
-            td.error {
-                background-color: #D20005;
-            }
-            td.much {
-                background-color: #33ff33;
-            }
-            
-            input {
-                text-align:center;
-                border:0;
-                font-size: 100%;
-            }
-            input.fixed {
-                background-color: #c2dfef;
-            }
-            input.error {
-                background-color: #D20005;
-            }
-            input.much {
-                background-color: #33ff33;
-            }
-            -->
-        </style>
-       
     </h:head>
-
     <h:body>
         <h:form>
-        <h1>#{sudokuBean.title}</h1>
-        <article>
-            <table>
-                <colgroup><col></col><col></col><col></col></colgroup>
-                <colgroup><col></col><col></col><col></col></colgroup>
-                <colgroup><col></col><col></col><col></col></colgroup> 
-                <tbody>
-                    <tr>
-                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(0)}">
-                            <td class="${row.fixed}"><input type="text" class="${row.fixed}" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
-                        </ui:repeat>
-                    </tr>
-                    <tr>
-                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(1)}">
-                            <td class="${row.fixed}"><input type="text" class="${row.fixed}" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
-                        </ui:repeat>
-                    </tr>
-                    <tr>
-                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(2)}">
-                            <td class="${row.fixed}"><input type="text" class="${row.fixed}" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
-                        </ui:repeat>
-                    </tr>
-                </tbody>                                              
-                <tbody>
-                    <tr>
-                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(3)}">
-                            <td class="${row.fixed}"><input type="text" class="${row.fixed}" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
-                        </ui:repeat>
-                    </tr>
-                    <tr>
-                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(4)}">
-                            <td class="${row.fixed}"><input type="text" class="${row.fixed}" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
-                        </ui:repeat>
-                    </tr>
-                    <tr>
-                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(5)}">
-                            <td class="${row.fixed}"><input type="text" class="${row.fixed}" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
-                        </ui:repeat>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(6)}">
-                            <td class="${row.fixed}"><input type="text" class="${row.fixed}" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
-                        </ui:repeat>
-                    </tr>
-                    <tr>
-                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(7)}">
-                            <td class="${row.fixed}"><input type="text" class="${row.fixed}" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
-                        </ui:repeat>
-                    </tr>
-                    <tr>
-                        <ui:repeat var="row" value="${sudokuBean.getNumberCellRow(8)}">
-                            <td class="${row.fixed}"><input type="text" class="${row.fixed}" jsf:value="${row.dispNumber}" jsf:readonly="${row.isReadonly()}" size="1" maxlength="1" /></td>
-                        </ui:repeat>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
-        
-        
-        <h:commandButton class="btn btn-default" id="execute" value="チェック" action="#{sudokuBean.execute()}"  />
-        <h:commandButton class="btn btn-default" id="reset" value="リセット" action="#{sudokuBean.reset()}"  />
-        
-        <p>難易度<br></br>
-            <h:selectOneRadio id="level" value="#{sudokuBean.hideCell}"  layout="lineDirection" >
+            <h1>#{sudokuBean.title}</h1>
+            <div id="sudoku">
+  <div class="parentCube">
+      <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow(0)}" >
+          <div class ="childCube ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
+      </ui:repeat> 
+  </div>
+  <div class="parentCube">
+      <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow(1)}" >
+          <div class ="childCube ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
+      </ui:repeat> 
+  </div>
+  <div class="parentCube">
+      <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow(2)}" >
+          <div class ="childCube ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
+      </ui:repeat> 
+  </div>
+  <div class="parentCube">
+      <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow(3)}" >
+          <div class ="childCube ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
+      </ui:repeat> 
+  </div>
+  <div class="parentCube">
+      <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow(4)}" >
+          <div class ="childCube ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
+      </ui:repeat> 
+  </div>
+   <div class="parentCube">
+      <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow(5)}" >
+          <div class ="childCube ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
+      </ui:repeat> 
+  </div>
+  <div class="parentCube">
+      <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow(6)}" >
+          <div class ="childCube ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
+      </ui:repeat> 
+  </div>
+  <div class="parentCube">
+      <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow(7)}" >
+          <div class ="childCube ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
+      </ui:repeat> 
+  </div>
+  <div class="parentCube">
+      <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow(8)}" >
+          <div class ="childCube ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
+      </ui:repeat> 
+  </div>
+</div>
+
+            <h:selectOneRadio id="level" value="#{sudokuBean.hideCell}" layout="lineDirection" styleClass="radiodesign">
                 <f:selectItems value="#{sudokuBean.levelValues}" />
             </h:selectOneRadio>
 
-        </p>
-        
+            <h:commandButton class="btn btn-default" id="execute" value="チェック" action="#{sudokuBean.execute()}"  />
+            <h:commandButton class="btn btn-default" id="reset" value="リセット" action="#{sudokuBean.reset()}"  />
 
-    
-    <h3>#{sudokuBean.message}</h3>
+            <h3>#{sudokuBean.message}</h3>
 
-
-        
-    
-    
-   
-       
-        
-        
-        
-        
         </h:form>
-        
-        
-
     </h:body>
 
 </html>

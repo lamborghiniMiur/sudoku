@@ -107,7 +107,7 @@ public class SudokuBean implements Serializable {
      */
     @PostConstruct
     private void init() {
-        this.setHideCell(Level.BEGINNER.getHideCell());
+        this.hideCell = Level.BEGINNER.getHideCell();
     
         reset();
     }
@@ -424,14 +424,17 @@ public class SudokuBean implements Serializable {
      */
     public List<NumberCell> getNumberCellRow(int row) {
         List<NumberCell> numberCellList = new ArrayList<>();
-        
+
         for (int i = 0; i < NINE; i++) {
             numberCellList.add(this.numberCellArray[row][i]);
         }
         
+        
         return numberCellList;
         
     }
+    
+
 
 
     
@@ -456,6 +459,7 @@ public class SudokuBean implements Serializable {
     public void setHideCell(int hideCell) {
         this.hideCell = hideCell;
     }
+
 
 
     

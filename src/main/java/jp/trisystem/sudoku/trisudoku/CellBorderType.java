@@ -9,7 +9,26 @@ package jp.trisystem.sudoku.trisudoku;
  *
  * @author トライ十郎
  */
+/**
+ *
+ * 数独のブロックの枠線の種類.
+ */
 public enum CellBorderType {
-    childCube1,childCube2,childCube3,childCube4;
-    
+    /**
+     * 下1px,右1px.
+     */
+    childCube1,
+    /**
+     * 下2px,右2px.
+     */
+    childCube2,
+    /**
+     * 下1px,右2px.
+     */
+    childCube3,
+    /**
+     * 下2px,右1px.
+     */
+    childCube4;
+
 }

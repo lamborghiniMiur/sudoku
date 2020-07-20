@@ -14,7 +14,14 @@ import java.util.List;
  *
  * @author miura
  */
-public class GenRandomNumberList {
+public final class GenRandomNumberList {
+    
+    /**
+     * コンストラクタ.
+     */
+    private GenRandomNumberList() {
+        
+    }
 
     
     /**
@@ -45,6 +52,7 @@ public class GenRandomNumberList {
         List<Integer> hideSeqNo = new ArrayList<>();
         
         List<Integer> intList = new ArrayList<>();
+        //81は数独のブロックの数
         for (int i = 0; i < 81; i++) {
             intList.add(i);
         }

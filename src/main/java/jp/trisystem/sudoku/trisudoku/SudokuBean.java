@@ -93,6 +93,7 @@ public class SudokuBean implements Serializable {
     /** 難易度. */
     private String level;
     
+    /** 隠すセルの数. */
     private int hideCell;
     
     
@@ -248,7 +249,7 @@ public class SudokuBean implements Serializable {
      * @return 生成済数値リスト(ブロック)
      */
     private GeneratedNumber generatedNumberFactory(int x, int y) {
-
+//0～2,3～5,6～8マス毎に分けて判定
         if (x >= 0 && x < 3) {
             if (y >= 0 && y < 3) {
                 return numberListBlockA;
@@ -333,12 +334,13 @@ public class SudokuBean implements Serializable {
             message = "正解です！";
         } else {
             message = "不正解！";
-        };
+        }
  }
 
     /**
      * グリッドのチェック.
      * 
+     * @return 全グリッドをチェックした結果を返す
      */
     private Boolean checkAllGrid() {
         Boolean checkAllGrid = Boolean.TRUE;
@@ -414,20 +416,36 @@ public class SudokuBean implements Serializable {
         this.numberCellArray[x][y] = numberCell;
     }
 
+    /**
+     * 全セルのリスト(9*9)を返す.
+     *
+     * @return 全セルのリスト(9*9)
+     */
     public List<NumberCell> getNumberCellRow() {
         List<NumberCell> numberCellList = new ArrayList<>();
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                String cellBorderType = getCellBorderType(row,col);
+                //ブロックの枠線の種類を取得
+                String cellBorderType = getCellBorderType(row, col);
                 this.numberCellArray[row][col].setCellborderType(cellBorderType);
+                //リストに格納
                 numberCellList.add(this.numberCellArray[row][col]);
             }
         }
 
-            return numberCellList;
+        return numberCellList;
 
-        }
+    }
     
+        /**
+         * 枠線の種類(太さ)を返す.
+         * 
+         * 枠線の種類の定義名称を返す.
+         * 
+         * @param row 行
+         * @param col 列
+         * @return 枠線の定義名称
+         */
         public String getCellBorderType(int row, int col) {
         CellBorderType cbt = CellBorderType.childCube1;
         // 行の判定
@@ -461,8 +479,12 @@ public class SudokuBean implements Serializable {
     
 
 
-
-    public Map<String,Object> getLevelValues() {
+    /**
+     * 難易度の種類を返す.
+     * 
+     * @return 難易度の種類
+     */
+    public Map<String, Object> getLevelValues() {
         return Level.getLevelValues();
     }
     

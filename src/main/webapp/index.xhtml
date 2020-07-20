@@ -13,26 +13,47 @@
         <h:outputStylesheet library="css" name="sudoku.css"/>
         <h:outputStylesheet library="css" name="radiodesign.css"/>
         
-        <title>Tri-Sudoku</title>
     </h:head>
     <h:body>
         <h:form>
+            <!--数独のタイトル-->
             <h1>#{sudokuBean.title}</h1>
+            
+            <!--数独のブロックの作成-->
             <div id="sudoku">
-
+                <!--1行ずつブロックを作成-->
                 <ui:repeat var ="row" value="${sudokuBean.getNumberCellRow()}" >
                     <div class ="${row.cellborderType} ${row.fixed}"><input type="text" class = "${row.fixed}" jsf:value ="${row.dispNumber}" jsf:readonly ="${row.isReadonly()}" size = "1" maxlength ="1"/></div>
                 </ui:repeat> 
 
             </div>
-
+            
+            <!--難易度選択のラジオボタン-->
             <h:selectOneRadio id="level" value="#{sudokuBean.hideCell}" layout="lineDirection" styleClass="radiodesign">
                 <f:selectItems value="#{sudokuBean.levelValues}" />
             </h:selectOneRadio>
-
-            <h:commandButton class="btn btn-default" id="execute" value="チェック" action="#{sudokuBean.execute()}"  styleClass=""  />
-            <h:commandButton class="btn btn-default" id="reset" value="リセット" action="#{sudokuBean.reset()}"  />
-
+            
+            <!--チェック用のボタン-->
+            <h:commandButton class="btn btn-default" id="execute" value="チェック" action="#{sudokuBean.execute()}"  
+  style="display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #668ad8;/*ボタン色*/
+  color: #FFF;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;" />
+            
+            <!--リセット用のボタン-->
+            <h:commandButton class="btn btn-default" id="reset" value="リセット" action="#{sudokuBean.reset()}" 
+                               style="display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #668ad8;/*ボタン色*/
+  color: #FFF;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;"/>
+            
+            <!--チェック、リセットボタンを押した時のメッセージ-->
             <h3>#{sudokuBean.message}</h3>
 
         </h:form>

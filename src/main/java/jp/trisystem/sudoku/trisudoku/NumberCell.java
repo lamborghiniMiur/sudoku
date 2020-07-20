@@ -29,6 +29,8 @@ public class NumberCell {
     
     /** 読み取り専用族生. */
     private Boolean readonly;
+    
+    private String cellborderType;
 
     
     /**
@@ -170,6 +172,20 @@ public class NumberCell {
      */
     public Boolean isReadonly() {
         return this.readonly;
+    }
+
+    /**
+     * @return the cellborderType
+     */
+    public String getCellborderType() {
+        return cellborderType;
+    }
+
+    /**
+     * @param cellborderType the cellborderType to set
+     */
+    public void setCellborderType(String cellborderType) {
+        this.cellborderType = cellborderType;
     }
     
     

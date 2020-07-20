@@ -60,7 +60,7 @@ public class SudokuBeanTest {
         instance.reset();
         
         for (int i = 0; i < 9; i++) {
-            List<NumberCell> list =  instance.getNumberCellRow(i);
+            List<NumberCell> list =  instance.getNumberCellRow();
             for (NumberCell numberCell : list) {
                 System.out.print("[" + numberCell.getNumber() + "]"); 
             }

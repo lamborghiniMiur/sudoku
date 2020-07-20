@@ -334,9 +334,7 @@ public class SudokuBean implements Serializable {
         } else {
             message = "不正解！";
         };
-        
-        
-    }
+ }
 
     /**
      * グリッドのチェック.
@@ -415,29 +413,55 @@ public class SudokuBean implements Serializable {
     private void setNumberCell(int x, int y, NumberCell numberCell) {
         this.numberCellArray[x][y] = numberCell;
     }
-    
-    /**
-     * 横1列分のセルのリストを返す.
-     * 
-     * @param row 行
-     * @return 横1列分のセルのリスト
-     */
-    public List<NumberCell> getNumberCellRow(int row) {
-        List<NumberCell> numberCellList = new ArrayList<>();
 
-        for (int i = 0; i < NINE; i++) {
-            numberCellList.add(this.numberCellArray[row][i]);
+    public List<NumberCell> getNumberCellRow() {
+        List<NumberCell> numberCellList = new ArrayList<>();
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                String cellBorderType = getCellBorderType(row,col);
+                this.numberCellArray[row][col].setCellborderType(cellBorderType);
+                numberCellList.add(this.numberCellArray[row][col]);
+            }
+        }
+
+            return numberCellList;
+
+        }
+    
+        public String getCellBorderType(int row, int col) {
+        CellBorderType cbt = CellBorderType.childCube1;
+        // 行の判定
+        switch (row) { 
+            case 2:
+            case 5:
+            case 8:
+                cbt = CellBorderType.childCube4;
+                break;
+            default:
+                break;
         }
         
-        
-        return numberCellList;
-        
+        // 列の判定
+        switch (col) {
+            case 2:
+            case 5:
+            case 8:
+                if (cbt.equals(CellBorderType.childCube1)) {
+                    cbt = CellBorderType.childCube3;
+                } else {
+                    cbt = CellBorderType.childCube2;
+                }
+                break;
+            default:
+                break;
+        }
+        return cbt.name();
     }
     
-
-
-
     
+
+
+
     public Map<String,Object> getLevelValues() {
         return Level.getLevelValues();
     }

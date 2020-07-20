@@ -11,41 +11,79 @@ input {
     text-align:center;
     border:0;
     font-size: medium;
-    vertical-align: middle;
 }
 input.fixed {
     background-color: #c2dfef;
-    width:48px;
-    height:48px;
+    
 }
 input.error {
     background-color: #D20005;
-    width:48px;
-    height:48px;
+    
 }
 input.much {
     background-color: #33ff33;
-    width:48px;
-    height:48px;
+    
 }
 #sudoku {
-  width:480px;
-  height:480px;
-  border: 3px solid #000000;
+    width:540px;
+    height:540px;
+    border-top:3px solid;
+    border-left:3px solid;
+    border-right:1px solid;
+    border-bottom:1px solid;
+    border-color: #000000;
 }
- .parentCube {
-    width:156px;
-    height:156px;
+.childCube1 {
+    width:59px;
+    height:59px;
     float:left;
-    border: 2px solid #000000;
-  }
-  .childCube {
-      width:50px;
-      height:50px;
-      float:left;
-      border: 1px solid #000000;
-      line-height: 45px;
-  }
+    border-right:1px solid;
+    border-bottom:1px solid;
+    border-color: #000000;
+    line-height: 49px;
+    text-align: center;
+}
+.childCube2 {
+    width:58px;
+    height:58px;
+    float:left;
+    border-right:2px solid;
+    border-bottom:2px solid;
+    border-color: #000000;
+    line-height: 49px;
+    text-align: center;
+}
+.childCube3 {
+    width:58px;
+    height:59px;
+    float:left;
+    border-right:2px solid;
+    border-bottom:1px solid;
+    border-color: #000000;
+    line-height: 49px;
+    text-align: center;
+}
+.childCube4 {
+    width:59px;
+    height:58px;
+    float:left;
+    border-right:1px solid;
+    border-bottom:2px solid;
+    border-color: #000000;
+    line-height: 49px;
+    text-align: center;
+}
+
+
+div.fixed {
+    background-color: #c2dfef;
+}
+div.error {
+    background-color: #D20005;
+}
+div.much {
+    background-color: #33ff33;
+}
 
 
 
